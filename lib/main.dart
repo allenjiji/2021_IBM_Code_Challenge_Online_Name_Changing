@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:name_change_app/Pages/HomePage.dart';
 import 'package:name_change_app/Pages/LoginPage.dart';
 import 'package:name_change_app/Pages/NewApplicationFormPage.dart';
+import 'package:name_change_app/Pages/PreviewPage.dart';
 import 'package:name_change_app/Pages/RegisterPage.dart';
 
 void main() async {
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         RegisterPage.routeName: (context) => RegisterPage(),
         HomePage.routeName: (context) => HomePage(),
         NewApplicationPage.routeName: (context) => const NewApplicationPage(),
+        PreviewPage.routeName: (context) => PreviewPage(),
       },
     );
   }

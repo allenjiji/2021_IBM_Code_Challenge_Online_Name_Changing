@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:name_change_app/Pages/PreviewPage.dart';
 
 class NewApplicationPage extends StatefulWidget {
   const NewApplicationPage({Key? key}) : super(key: key);
@@ -14,6 +15,13 @@ class NewApplicationPage extends StatefulWidget {
 }
 
 class _NewApplicationPageState extends State<NewApplicationPage> {
+  final TextEditingController fname = TextEditingController();
+  final TextEditingController address = TextEditingController();
+  final TextEditingController incorrect_name = TextEditingController();
+  final TextEditingController correct_name = TextEditingController();
+  final TextEditingController document_name1 = TextEditingController();
+  final TextEditingController document_name2 = TextEditingController();
+  String? document_url;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,17 +34,7 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
-              // controller:   ,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name',
-                  hintText: 'Enter your Name'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              // controller:   ,
+              controller: fname,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Father\'s name',
@@ -46,7 +44,7 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
-              // controller:   ,
+              controller: address,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Address',
@@ -56,7 +54,7 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
-              // controller:   ,
+              controller: document_name1,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Name of Document to be corrected ',
@@ -66,7 +64,7 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
-              // controller:   ,
+              controller: incorrect_name,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Incorrect Name',
@@ -76,7 +74,7 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
-              // controller:   ,
+              controller: correct_name,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Correct Name',
@@ -86,7 +84,7 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
-              // controller:   ,
+              controller: document_name2,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Name of Supporting Document',
@@ -118,6 +116,16 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
               onPressed: () async {
                 if (pickedFile != null) {
                   uploadFile();
+                  Navigator.of(context)
+                      .pushNamed(PreviewPage.routeName, arguments: {
+                    'fname': fname.text,
+                    'address': address.text,
+                    'incorrect_name': incorrect_name.text,
+                    'correct_name': correct_name.text,
+                    'document_name1': document_name1.text,
+                    'document_name2': document_name2.text,
+                    'document_url': document_url
+                  });
                 }
               },
               child: const Text(
@@ -152,7 +160,8 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
 
     final snapshot = await uploadTask!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
-    print('Download from: $urlDownload');
+    // print('Download from: $urlDownload');
+    document_url = urlDownload;
     setState(() {
       uploadTask = null;
     });
