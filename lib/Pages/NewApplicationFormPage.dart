@@ -29,112 +29,113 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
         title: Text("New Application"),
       ),
       body: Form(
-          child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: fname,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Father\'s name',
-                  hintText: 'Enter your Father\'s Name'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: address,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Address',
-                  hintText: 'Enter your Address'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: document_name1,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name of Document to be corrected ',
-                  hintText: 'Enter the Name of the Document'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: incorrect_name,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Incorrect Name',
-                  hintText: 'Enter the Incorrect Name'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: correct_name,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Correct Name',
-                  hintText: 'Enter the Correct Name'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: document_name2,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name of Supporting Document',
-                  hintText: 'Enter name of Document'),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                  onPressed: selectFile,
-                  child: Text("Select Supporting document")),
-              pickedFile == null
-                  ? Text("No File Selected")
-                  : Text(pickedFile!.name)
-            ],
-          ),
-          // ElevatedButton(
-          //     onPressed: pickedFile != null ? uploadFile : null,
-          //     child: Text("Upload")),
-          buildProgress(),
-          Container(
-            margin: EdgeInsets.only(top: 15),
-            height: 50,
-            width: 250,
-            decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-            child: TextButton(
-              onPressed: () async {
-                if (pickedFile != null) {
-                  uploadFile();
-                  Navigator.of(context)
-                      .pushNamed(PreviewPage.routeName, arguments: {
-                    'fname': fname.text,
-                    'address': address.text,
-                    'incorrect_name': incorrect_name.text,
-                    'correct_name': correct_name.text,
-                    'document_name1': document_name1.text,
-                    'document_name2': document_name2.text,
-                    'document_url': document_url
-                  });
-                }
-              },
-              child: const Text(
-                '- Proceed -',
-                style: TextStyle(color: Colors.white, fontSize: 25),
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextFormField(
+                controller: fname,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Father\'s name',
+                    hintText: 'Enter your Father\'s Name'),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextFormField(
+                controller: address,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Address',
+                    hintText: 'Enter your Address'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextFormField(
+                controller: document_name1,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Name of Document to be corrected ',
+                    hintText: 'Enter the Name of the Document'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextFormField(
+                controller: incorrect_name,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Incorrect Name',
+                    hintText: 'Enter the Incorrect Name'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextFormField(
+                controller: correct_name,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Correct Name',
+                    hintText: 'Enter the Correct Name'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextFormField(
+                controller: document_name2,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Name of Supporting Document',
+                    hintText: 'Enter name of Document'),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                    onPressed: selectFile,
+                    child: Text("Select Supporting document")),
+                pickedFile == null
+                    ? Text("No File Selected")
+                    : Text(pickedFile!.name)
+              ],
+            ),
+            // ElevatedButton(
+            //     onPressed: pickedFile != null ? uploadFile : null,
+            //     child: Text("Upload")),
+            buildProgress(),
+            Container(
+              margin: EdgeInsets.only(top: 15),
+              height: 50,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              child: TextButton(
+                onPressed: () async {
+                  if (pickedFile != null) {
+                    uploadFile().then((value) => Navigator.of(context)
+                            .pushNamed(PreviewPage.routeName, arguments: {
+                          'fname': fname.text,
+                          'address': address.text,
+                          'incorrect_name': incorrect_name.text,
+                          'correct_name': correct_name.text,
+                          'document_name1': document_name1.text,
+                          'document_name2': document_name2.text,
+                          'document_url': document_url
+                        }));
+                  }
+                },
+                child: const Text(
+                  '- Proceed -',
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                ),
+              ),
+            ),
+          ],
+        ),
       )),
     );
   }
