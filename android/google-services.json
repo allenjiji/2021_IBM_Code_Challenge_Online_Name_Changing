@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618336214184",
+    "project_id": "name-change-app-ibm-isl",
+    "storage_bucket": "name-change-app-ibm-isl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618336214184:android:4e8f4023641d7010a3369d",
+        "android_client_info": {
+          "package_name": "com.example.name_change_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618336214184-j60qldea4a773hcvdaeke2s0g3pju19i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBZnirhfLY5Zg8kXXbeFQhU89asJcnFqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618336214184-j60qldea4a773hcvdaeke2s0g3pju19i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

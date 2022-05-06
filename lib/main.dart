@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:name_change_app/Pages/HomePage.dart';
 import 'package:name_change_app/Pages/LoginPage.dart';
 import 'package:name_change_app/Pages/RegisterPage.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginPage(),
         LoginPage.routeName:(context) => const LoginPage(),
         RegisterPage.routeName: (context)=> const RegisterPage(),
+        HomePage.routeName:(context)=>const HomePage(),
       },
     );
   }

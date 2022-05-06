@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:name_change_app/Pages/RegisterPage.dart';
 
+import 'HomePage.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   static const routeName = '/LoginPage';
@@ -12,7 +14,7 @@ class LoginPage extends StatelessWidget {
         title: const Text("Hello"),
       ),
       body: Column(
-        children:  [
+        children: [
           const Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
@@ -33,12 +35,27 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: (){
+            onPressed: () {
               Navigator.of(context).pushNamed(RegisterPage.routeName);
             },
-            child: const Text(  
+            child: const Text(
               'I need to Register as New User',
               style: TextStyle(color: Colors.blue, fontSize: 15),
+            ),
+          ),
+          Container(
+            height: 50,
+            width: 250,
+            decoration: BoxDecoration(
+                color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(HomePage.routeName);
+              },
+              child: const Text(
+                'Login',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
             ),
           ),
         ],
