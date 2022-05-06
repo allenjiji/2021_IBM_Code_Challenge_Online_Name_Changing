@@ -1,16 +1,30 @@
-# name_change_app
+# Online Name Changing
 
-A new Flutter project.
+Project done as part of IBM Code Challenge.
+Based on Theme 1 (As per guidelines):
+    Making the process involving Govt easier online.
+This project attempt to make the person's 'name changing' process easier online.
+Conventional mode of Name changing involves mainly 2 steps:
+    - Create an affidavit for change of name (On a 20 Ruppee stamp paper)
+    - Publish about your name change in Newspaper
+    - Notify it in State Gazette
+An affidavit needs to be made explaining why the name change is required. These details need to be included in the affidavit.
+The applicant should sign the affidavit and get it attested by a Notary or Judicial Magistrate or an Oaths Commissioner.
+After Notarizing the affidavit, you need to publish the change of your name in two local newspapers in Kerala.
 
-## Getting Started
+The proposed solution consist of 2 applications.
+1. A Mobile Application - For the end user (Who needs the service)
+2. A Web Application -  For the authories and Officials to act upon the request from users.
 
-This project is a starting point for a Flutter application.
+This repository contains the Mobile Application.
+    The application requires the user to login first. If the user is visiting for the first time he/she need to register.
+    It provides the options to apply for a name change
+    Track the status of the request (Not Implemented)
+    See and Review the Application
 
-A few resources to get you started if this is your first Flutter project:
+App developed with Flutter Framework.
+Backend used here is Firebase for quick development.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Google slides link](https://docs.google.com/presentation/d/1j-PzurGKQD_1O03AYcAhf7ji6onGoRaJ65YdYGbMbI0/edit?usp=sharing)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Video Demo of App](https://youtu.be/u470xBrxJus)
