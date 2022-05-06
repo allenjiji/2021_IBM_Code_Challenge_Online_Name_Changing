@@ -28,8 +28,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  file_picker: ^4.5.1
   firebase_auth: ^3.3.17
   firebase_core: ^1.16.0
+  firebase_storage: ^10.2.15
   flutter:
     sdk: flutter
   timeline_tile: ^2.0.0

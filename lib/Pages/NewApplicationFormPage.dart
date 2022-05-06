@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class NewApplicationPage extends StatefulWidget {
@@ -88,18 +93,35 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
                   hintText: 'Enter name of Document'),
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                  onPressed: selectFile,
+                  child: Text("Select Supporting document")),
+              pickedFile == null
+                  ? Text("No File Selected")
+                  : Text(pickedFile!.name)
+            ],
+          ),
+          // ElevatedButton(
+          //     onPressed: pickedFile != null ? uploadFile : null,
+          //     child: Text("Upload")),
+          buildProgress(),
           Container(
+            margin: EdgeInsets.only(top: 15),
             height: 50,
             width: 250,
             decoration: BoxDecoration(
                 color: Colors.blue, borderRadius: BorderRadius.circular(20)),
             child: TextButton(
               onPressed: () async {
-                print("Hello");
-                // Navigator.of(context).pushNamed(HomePage.routeName);
+                if (pickedFile != null) {
+                  uploadFile();
+                }
               },
               child: const Text(
-                'Proceed to Payment',
+                '- Proceed -',
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
@@ -107,5 +129,63 @@ class _NewApplicationPageState extends State<NewApplicationPage> {
         ],
       )),
     );
+  }
+
+  PlatformFile? pickedFile;
+  UploadTask? uploadTask;
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
+
+  Future uploadFile() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final path = 'files/${user!.email}/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+    final ref = FirebaseStorage.instance.ref().child(path);
+    setState(() {
+      uploadTask = ref.putFile(file);
+    });
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    print('Download from: $urlDownload');
+    setState(() {
+      uploadTask = null;
+    });
+  }
+
+  Widget buildProgress() {
+    return StreamBuilder<TaskSnapshot>(
+        stream: uploadTask?.snapshotEvents,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data!;
+            double progress = (data.bytesTransferred / data.totalBytes);
+            return SizedBox(
+              height: 50,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  LinearProgressIndicator(
+                      value: progress, backgroundColor: Colors.amber),
+                  Center(
+                    child: Text(
+                      '${(100 * progress).roundToDouble()}% uploaded',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            );
+          } else {
+            return const SizedBox(
+              height: 50,
+            );
+          }
+        });
   }
 }
